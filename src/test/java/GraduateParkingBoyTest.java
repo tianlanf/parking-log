@@ -52,4 +52,33 @@ public class GraduateParkingBoyTest {
             assertEquals("All parking lots are full", e.getMessage());
         }
     }
+
+    @Test
+    public void shouldPickUpCarFromFirstParkingLotSuccessfully() throws Throwable {
+        GraduateParkingBoy parkingBoy =
+                new GraduateParkingBoy(new ParkingCompany(asList(new ParkingLot(2), new ParkingLot(3))));
+        Car mycar = new Car("123");
+
+        CarTicket ticket = parkingBoy.park(mycar);
+        Car result = parkingBoy.pickup(ticket);
+
+        assertNotNull(ticket);
+        assertEquals(mycar, result);
+    }
+
+    @Test
+    public void shouldPickUpCarFromOtherParkingLotSuccessfully() throws Throwable {
+        GraduateParkingBoy parkingBoy =
+                new GraduateParkingBoy(new ParkingCompany(asList(new ParkingLot(2), new ParkingLot(3))));
+
+        parkingBoy.park(new Car("123"));
+        parkingBoy.park(new Car("234"));
+
+        Car myCar = new Car("345");
+
+        CarTicket ticket = parkingBoy.park(myCar);
+        Car result = parkingBoy.pickup(ticket);
+
+        assertEquals(result, myCar);
+    }
 }

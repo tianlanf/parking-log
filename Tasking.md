@@ -11,3 +11,4 @@
 9. Given multiple parking lots, When a graduate parking boy pickup a car with ticket, Then he can get the car correctly
 10. Given multiple parking lots, When a graduate parking boy pickup a car without ticket, Then he cannot get the car
 11. Given multiple parking lots, When a graduate parking boy pickup a car with a fake ticket, Then he cannot get the car
+12. Given multiple parking lots, When a graduate parking boy park a car, Then a ticket with parking lot number is returned
