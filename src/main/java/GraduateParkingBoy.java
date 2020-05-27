@@ -1,4 +1,3 @@
-import java.util.List;
 import java.util.function.Supplier;
 
 public class GraduateParkingBoy {
@@ -19,13 +18,13 @@ public class GraduateParkingBoy {
         if (ticket == null) {
             return null;
         }
-        List<ParkingLot> parkingLots = parkingCompany.getParkingLots();
-        for (ParkingLot parkingLot : parkingLots) {
-            Car car = parkingLot.pickUp(ticket);
-            if (car != null) {
-                return car;
-            }
+        ParkingLot parkingLot = parkingCompany.getParkingLots().stream()
+                .filter(lot -> lot.getId() == ticket.getParkingLotId())
+                .findFirst().orElse(null);
+        if (parkingLot != null) {
+            return parkingLot.pickUp(ticket);
+        } else {
+            return null;
         }
-        return null;
     }
 }

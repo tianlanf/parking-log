@@ -9,22 +9,23 @@ import static org.junit.Assert.fail;
 public class GraduateParkingBoyTest {
     @Test
     public void shouldParkToFirstParkingLot() throws Throwable {
-        ParkingLot firstParkingLot = new ParkingLot(2);
+        ParkingLot firstParkingLot = new ParkingLot(1, 2);
         GraduateParkingBoy parkingBoy =
-                new GraduateParkingBoy(new ParkingCompany(asList(firstParkingLot, new ParkingLot(3))));
+                new GraduateParkingBoy(new ParkingCompany(asList(firstParkingLot, new ParkingLot(2, 3))));
         Car mycar = new Car("123");
 
         CarTicket ticket = parkingBoy.park(mycar);
 
         assertNotNull(ticket);
         assertEquals(mycar, firstParkingLot.pickUp(ticket));
+        assertEquals(1, ticket.getParkingLotId());
     }
 
     @Test
     public void shouldParkToFirstAvailableParkingLot() throws Throwable {
-        ParkingLot secondParkingLot = new ParkingLot(3);
+        ParkingLot secondParkingLot = new ParkingLot(2, 3);
         GraduateParkingBoy parkingBoy =
-                new GraduateParkingBoy(new ParkingCompany(asList(new ParkingLot(2), secondParkingLot)));
+                new GraduateParkingBoy(new ParkingCompany(asList(new ParkingLot(1, 2), secondParkingLot)));
 
         parkingBoy.park(new Car("123"));
         parkingBoy.park(new Car("234"));
@@ -35,13 +36,15 @@ public class GraduateParkingBoyTest {
 
         assertNotNull(ticket);
         assertEquals(myCar, secondParkingLot.pickUp(ticket));
+        assertEquals(2, ticket.getParkingLotId());
+
     }
 
 
     @Test
     public void shouldThrowExceptionWhenAllParkingLotsAreFull() throws Throwable {
         GraduateParkingBoy parkingBoy =
-                new GraduateParkingBoy(new ParkingCompany(asList(new ParkingLot(1), new ParkingLot(1))));
+                new GraduateParkingBoy(new ParkingCompany(asList(new ParkingLot(1, 1), new ParkingLot(2, 1))));
 
         parkingBoy.park(new Car("123"));
         parkingBoy.park(new Car("234"));
@@ -57,7 +60,7 @@ public class GraduateParkingBoyTest {
     @Test
     public void shouldPickUpCarFromFirstParkingLotSuccessfully() throws Throwable {
         GraduateParkingBoy parkingBoy =
-                new GraduateParkingBoy(new ParkingCompany(asList(new ParkingLot(2), new ParkingLot(3))));
+                new GraduateParkingBoy(new ParkingCompany(asList(new ParkingLot(1, 2), new ParkingLot(2, 3))));
         Car myCar = new Car("123");
 
         CarTicket ticket = parkingBoy.park(myCar);
@@ -69,7 +72,7 @@ public class GraduateParkingBoyTest {
     @Test
     public void shouldPickUpCarFromOtherParkingLotSuccessfully() throws Throwable {
         GraduateParkingBoy parkingBoy =
-                new GraduateParkingBoy(new ParkingCompany(asList(new ParkingLot(2), new ParkingLot(3))));
+                new GraduateParkingBoy(new ParkingCompany(asList(new ParkingLot(1, 2), new ParkingLot(2, 3))));
 
         parkingBoy.park(new Car("123"));
         parkingBoy.park(new Car("234"));
@@ -85,7 +88,7 @@ public class GraduateParkingBoyTest {
     @Test
     public void shouldNotPickUpCarWithoutTicket() throws Throwable {
         GraduateParkingBoy parkingBoy =
-                new GraduateParkingBoy(new ParkingCompany(asList(new ParkingLot(2), new ParkingLot(3))));
+                new GraduateParkingBoy(new ParkingCompany(asList(new ParkingLot(1, 2), new ParkingLot(2, 3))));
         Car myCar = new Car("123");
 
         parkingBoy.park(myCar);
@@ -97,9 +100,9 @@ public class GraduateParkingBoyTest {
     @Test
     public void shouldNotPickUpCarWithFakeTicket() {
         GraduateParkingBoy parkingBoy =
-                new GraduateParkingBoy(new ParkingCompany(asList(new ParkingLot(2), new ParkingLot(3))));
+                new GraduateParkingBoy(new ParkingCompany(asList(new ParkingLot(1, 2), new ParkingLot(2, 3))));
 
-        Car result = parkingBoy.pickup(new CarTicket());
+        Car result = parkingBoy.pickup(new CarTicket(1));
 
         assertNull(result);
     }

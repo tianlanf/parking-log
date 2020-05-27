@@ -3,15 +3,17 @@ import java.util.Map;
 
 public class ParkingLot {
     private final int capacity;
+    private final int id;
     private Map<CarTicket, Car> parking = new HashMap<>();
 
-    public ParkingLot(int capacity) {
+    public ParkingLot(int id, int capacity) {
+        this.id = id;
         this.capacity = capacity;
     }
 
     public CarTicket park(Car car) {
         if (parking.size() < capacity) {
-            CarTicket carTicket = new CarTicket();
+            CarTicket carTicket = new CarTicket(id);
             parking.put(carTicket, car);
             return carTicket;
         } else {
@@ -25,5 +27,9 @@ public class ParkingLot {
 
     public boolean isFull() {
         return capacity == parking.size();
+    }
+
+    public int getId() {
+        return id;
     }
 }

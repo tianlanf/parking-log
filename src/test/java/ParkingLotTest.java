@@ -7,7 +7,7 @@ import static org.junit.Assert.fail;
 
 public class ParkingLotTest {
 
-    private final ParkingLot parkingLot = new ParkingLot(2);
+    private final ParkingLot parkingLot = new ParkingLot(1, 2);
 
     @Test
     public void shouldGetTicketUponParking() {
@@ -38,7 +38,7 @@ public class ParkingLotTest {
 
     @Test
     public void shouldNotGetCarWithFakeTicket() {
-        Car result = parkingLot.pickUp(new CarTicket());
+        Car result = parkingLot.pickUp(new CarTicket(1));
         assertNull(result);
     }
 
