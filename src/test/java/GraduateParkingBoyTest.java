@@ -3,10 +3,11 @@ import org.junit.Test;
 import static java.util.Arrays.asList;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.fail;
 
 public class GraduateParkingBoyTest {
     @Test
-    public void shouldParkToFirstParkingLot() {
+    public void shouldParkToFirstParkingLot() throws Throwable {
         ParkingLot firstParkingLot = new ParkingLot(2);
         GraduateParkingBoy parkingBoy =
                 new GraduateParkingBoy(new ParkingCompany(asList(firstParkingLot, new ParkingLot(3))));
@@ -19,7 +20,7 @@ public class GraduateParkingBoyTest {
     }
 
     @Test
-    public void shouldParkToFirstAvailableParkingLot() {
+    public void shouldParkToFirstAvailableParkingLot() throws Throwable {
         ParkingLot secondParkingLot = new ParkingLot(3);
         GraduateParkingBoy parkingBoy =
                 new GraduateParkingBoy(new ParkingCompany(asList(new ParkingLot(2), secondParkingLot)));
@@ -33,5 +34,22 @@ public class GraduateParkingBoyTest {
 
         assertNotNull(ticket);
         assertEquals(myCar, secondParkingLot.pickUp(ticket));
+    }
+
+
+    @Test
+    public void shouldThrowExceptionWhenAllParkingLotsAreFull() throws Throwable {
+        GraduateParkingBoy parkingBoy =
+                new GraduateParkingBoy(new ParkingCompany(asList(new ParkingLot(1), new ParkingLot(1))));
+
+        parkingBoy.park(new Car("123"));
+        parkingBoy.park(new Car("234"));
+
+        try{
+            parkingBoy.park(new Car("345"));
+            fail();
+        } catch (Exception e) {
+            assertEquals("All parking lots are full", e.getMessage());
+        }
     }
 }
