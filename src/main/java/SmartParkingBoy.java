@@ -13,7 +13,11 @@ public class SmartParkingBoy implements ParkingBoy {
         List<ParkingLot> parkingLots = parkingCompany.getParkingLots();
         parkingLots.sort(Comparator.comparingInt(ParkingLot::getAvailableSlotsNumber));
 
-        return parkingLots.get(parkingLots.size() -1).park(car);
+        ParkingLot parkingLot = parkingLots.get(parkingLots.size() - 1);
+        if (parkingLot.isFull()) {
+            throw new RuntimeException("All parking lots are full");
+        }
+        return parkingLot.park(car);
     }
 
     @Override

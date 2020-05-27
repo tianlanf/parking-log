@@ -3,6 +3,7 @@ import org.junit.Test;
 import static java.util.Arrays.asList;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.fail;
 
 public class SmartParkingBoyTest {
     @Test
@@ -58,5 +59,21 @@ public class SmartParkingBoyTest {
         SmartParkingBoy parkingBoy = new SmartParkingBoy(new ParkingCompany(asList(first, second)));
         Car result = parkingBoy.pickup(new CarTicket(1));
         assertNull(result);
+    }
+
+    @Test
+    public void shouldThrowExceptionWhenAllParkingLotsAreFull() throws Throwable {
+        ParkingBoy parkingBoy =
+                new SmartParkingBoy(new ParkingCompany(asList(new ParkingLot(1, 1), new ParkingLot(2, 1))));
+
+        parkingBoy.park(new Car("123"));
+        parkingBoy.park(new Car("234"));
+
+        try{
+            parkingBoy.park(new Car("345"));
+            fail();
+        } catch (Exception e) {
+            assertEquals("All parking lots are full", e.getMessage());
+        }
     }
 }
