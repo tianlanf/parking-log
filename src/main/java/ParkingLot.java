@@ -29,6 +29,10 @@ public class ParkingLot {
         return capacity == parking.size();
     }
 
+    public int getAvailableSlotsNumber() {
+        return capacity - parking.size();
+    }
+
     public int getId() {
         return id;
     }

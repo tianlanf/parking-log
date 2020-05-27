@@ -1,12 +1,13 @@
 import java.util.function.Supplier;
 
-public class GraduateParkingBoy {
+public class GraduateParkingBoy implements ParkingBoy{
     private ParkingCompany parkingCompany;
 
     public GraduateParkingBoy(ParkingCompany parkingCompany) {
         this.parkingCompany = parkingCompany;
     }
 
+    @Override
     public CarTicket park(Car car) throws Throwable {
         ParkingLot parkingLot = parkingCompany.getParkingLots().stream().
                 filter(lot -> !lot.isFull()).findFirst()
@@ -14,6 +15,7 @@ public class GraduateParkingBoy {
         return parkingLot.park(car);
     }
 
+    @Override
     public Car pickup(CarTicket ticket) {
         if (ticket == null) {
             return null;
