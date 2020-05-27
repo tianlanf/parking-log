@@ -94,4 +94,14 @@ public class GraduateParkingBoyTest {
         assertNull(result);
     }
 
+    @Test
+    public void shouldNotPickUpCarWithFakeTicket() {
+        GraduateParkingBoy parkingBoy =
+                new GraduateParkingBoy(new ParkingCompany(asList(new ParkingLot(2), new ParkingLot(3))));
+
+        Car result = parkingBoy.pickup(new CarTicket());
+
+        assertNull(result);
+    }
+
 }
