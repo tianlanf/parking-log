@@ -22,4 +22,8 @@ public class ParkingLot {
     public Car pickUp(CarTicket ticket) {
         return parking.get(ticket);
     }
+
+    public boolean isFull() {
+        return capacity == parking.size();
+    }
 }

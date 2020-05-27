@@ -6,7 +6,8 @@ public class GraduateParkingBoy {
     }
 
     public CarTicket park(Car car) {
-        ParkingLot parkingLot = parkingCompany.getParkingLots().get(0);
+        ParkingLot parkingLot = parkingCompany.getParkingLots().stream().
+                filter(lot -> !lot.isFull()).findFirst().get();
         return parkingLot.park(car);
     }
 }

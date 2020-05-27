@@ -7,6 +7,7 @@
 
 6. Given multiple parking lots, When a graduate parking boy park a car, Then he will park to first parking lot
 7. Given multiple parking lots, When a graduate parking boy park a car and first parking lot is full, Then he will park to next parking lot sequentially
-8. Given multiple parking lots, When a graduate parking boy pickup a car with ticket, Then he can get the car correctly
-9. Given multiple parking lots, When a graduate parking boy pickup a car without ticket, Then he cannot get the car
-10. Given multiple parking lots, When a graduate parking boy pickup a car with a fake ticket, Then he cannot get the car
+8. Given multiple parking lots, When a graduate parking boy park a car and all parking lots are full, Then he cannot park
+9. Given multiple parking lots, When a graduate parking boy pickup a car with ticket, Then he can get the car correctly
+10. Given multiple parking lots, When a graduate parking boy pickup a car without ticket, Then he cannot get the car
+11. Given multiple parking lots, When a graduate parking boy pickup a car with a fake ticket, Then he cannot get the car
