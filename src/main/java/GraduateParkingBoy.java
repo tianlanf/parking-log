@@ -16,6 +16,9 @@ public class GraduateParkingBoy {
     }
 
     public Car pickup(CarTicket ticket) {
+        if (ticket == null) {
+            return null;
+        }
         List<ParkingLot> parkingLots = parkingCompany.getParkingLots();
         for (ParkingLot parkingLot : parkingLots) {
             Car car = parkingLot.pickUp(ticket);

@@ -3,6 +3,7 @@ import org.junit.Test;
 import static java.util.Arrays.asList;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.fail;
 
 public class GraduateParkingBoyTest {
@@ -57,13 +58,12 @@ public class GraduateParkingBoyTest {
     public void shouldPickUpCarFromFirstParkingLotSuccessfully() throws Throwable {
         GraduateParkingBoy parkingBoy =
                 new GraduateParkingBoy(new ParkingCompany(asList(new ParkingLot(2), new ParkingLot(3))));
-        Car mycar = new Car("123");
+        Car myCar = new Car("123");
 
-        CarTicket ticket = parkingBoy.park(mycar);
+        CarTicket ticket = parkingBoy.park(myCar);
         Car result = parkingBoy.pickup(ticket);
 
-        assertNotNull(ticket);
-        assertEquals(mycar, result);
+        assertEquals(myCar, result);
     }
 
     @Test
@@ -81,4 +81,17 @@ public class GraduateParkingBoyTest {
 
         assertEquals(result, myCar);
     }
+
+    @Test
+    public void shouldNotPickUpCarWithoutTicket() throws Throwable {
+        GraduateParkingBoy parkingBoy =
+                new GraduateParkingBoy(new ParkingCompany(asList(new ParkingLot(2), new ParkingLot(3))));
+        Car myCar = new Car("123");
+
+        parkingBoy.park(myCar);
+        Car result = parkingBoy.pickup(null);
+
+        assertNull(result);
+    }
+
 }
