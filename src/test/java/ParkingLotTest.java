@@ -3,10 +3,11 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.fail;
 
 public class ParkingLotTest {
 
-    private final ParkingLot parkingLot = new ParkingLot();
+    private final ParkingLot parkingLot = new ParkingLot(2);
 
     @Test
     public void shouldGetTicketUponParking() {
@@ -41,4 +42,15 @@ public class ParkingLotTest {
         assertNull(result);
     }
 
+    @Test
+    public void shouldNotParkWhenParkingLotIsFull() {
+        parkingLot.park(new Car("123"));
+        parkingLot.park(new Car("345"));
+        try {
+            parkingLot.park(new Car("456"));
+            fail();
+        } catch (Exception e) {
+            assertEquals("parking lot is already full", e.getMessage());
+        }
+    }
 }
