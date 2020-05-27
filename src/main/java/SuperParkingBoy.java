@@ -21,6 +21,16 @@ public class SuperParkingBoy implements ParkingBoy {
 
     @Override
     public Car pickup(CarTicket ticket) {
-        return null;
+        if (ticket == null) {
+            return null;
+        }
+        ParkingLot parkingLot = parkingCompany.getParkingLots().stream()
+                .filter(lot -> lot.getId() == ticket.getParkingLotId())
+                .findFirst().orElse(null);
+        if (parkingLot != null) {
+            return parkingLot.pickUp(ticket);
+        } else {
+            return null;
+        }
     }
 }
