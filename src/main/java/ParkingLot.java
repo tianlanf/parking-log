@@ -33,6 +33,10 @@ public class ParkingLot {
         return capacity - parking.size();
     }
 
+    public int getAvailabilityInPercentage() {
+        return (getAvailableSlotsNumber() * 100) / capacity;
+    }
+
     public int getId() {
         return id;
     }

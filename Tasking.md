@@ -17,4 +17,9 @@
 14. Given I am smart parking boy, When I pickup a car with ticket, Then I can get the car correctly
 15. Given I am smart parking boy, When I pickup a car without ticket, or with fake ticket, Then I cannot get the car
 16. Given I am smart parking boy, When I park a car and all parking lots are full, Then I cannot park
-17. Given I am smart parking boy, When I park a car and two parking lots have same available slots, Then I park to first parking lot
+
+17. Given I am super parking boy, When I park a car, Then the car will be parked to parking lot with highest availability
+18. Given I am super parking boy, When I park a car and all parking lots are full, Then I cannot park
+19. Given I am smart parking boy, When I pickup a car with ticket, Then I can get the car correctly
+20. Given I am smart parking boy, When I pickup a car without ticket, or with fake ticket, Then I cannot get the car
+
